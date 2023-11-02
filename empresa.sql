@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-11-2023 a las 01:29:36
+-- Tiempo de generación: 02-11-2023 a las 05:04:16
 -- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.1.17
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -53,16 +53,17 @@ CREATE TABLE `empleados` (
   `nombre_empleado` varchar(250) NOT NULL,
   `apellido_empleado` varchar(250) NOT NULL,
   `correo_empleado` varchar(100) NOT NULL,
-  `foto` varchar(1000) NOT NULL
+  `foto` varchar(1000) NOT NULL,
+  `clave_empleado` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `empleados`
 --
 
-INSERT INTO `empleados` (`id_empleado`, `nombre_empleado`, `apellido_empleado`, `correo_empleado`, `foto`) VALUES
-(1092456525, 'Juan Manuel', 'Palacio', 'jm.palacio@iecamarajunior.edu.co', 'WhatsApp Image 2023-09-26 at 8.09.25 PM.jpeg'),
-(1092463770, 'Joan Manuel', 'Vasquez', 'jm.vasquez@iecamarjunior.edu.co', 'joan.jpg');
+INSERT INTO `empleados` (`id_empleado`, `nombre_empleado`, `apellido_empleado`, `correo_empleado`, `foto`, `clave_empleado`) VALUES
+(1092456525, 'Juan Manuel', 'Palacio', 'jm.palacio@iecamarajunior.edu.co', 'WhatsApp Image 2023-09-26 at 8.09.25 PM.jpeg', 'juanma'),
+(1092463770, 'Joan Manuel', 'Vasquez', 'jm.vasquez@iecamarjunior.edu.co', 'joan.jpg', 'joanma');
 
 -- --------------------------------------------------------
 
@@ -76,8 +77,15 @@ CREATE TABLE `factura` (
   `id_empleado` bigint(20) NOT NULL,
   `id_cliente` bigint(20) NOT NULL,
   `detalle` varchar(200) NOT NULL,
-  `id_producto` int(11) DEFAULT NULL
+  `id_producto` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `factura`
+--
+
+INSERT INTO `factura` (`id_factura`, `fecha`, `id_empleado`, `id_cliente`, `detalle`, `id_producto`) VALUES
+(12, '2023-11-02 02:42:19', 1092456525, 21792675, 'Venta de mouse', 3);
 
 -- --------------------------------------------------------
 
@@ -92,6 +100,13 @@ CREATE TABLE `productos` (
   `cantidad_producto` int(11) NOT NULL,
   `descripcion_producto` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`id_producto`, `nombre_producto`, `precio_producto`, `cantidad_producto`, `descripcion_producto`) VALUES
+(3, 'Mouse', 50000, 10, 'Mouse inalámbrico recargable');
 
 --
 -- Índices para tablas volcadas
@@ -115,7 +130,14 @@ ALTER TABLE `empleados`
 ALTER TABLE `factura`
   ADD PRIMARY KEY (`id_factura`),
   ADD KEY `id_empleado` (`id_empleado`),
-  ADD KEY `id_cliente` (`id_cliente`);
+  ADD KEY `id_cliente` (`id_cliente`),
+  ADD KEY `id_producto` (`id_producto`);
+
+--
+-- Indices de la tabla `productos`
+--
+ALTER TABLE `productos`
+  ADD PRIMARY KEY (`id_producto`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -125,7 +147,13 @@ ALTER TABLE `factura`
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de la tabla `productos`
+--
+ALTER TABLE `productos`
+  MODIFY `id_producto` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
@@ -136,7 +164,8 @@ ALTER TABLE `factura`
 --
 ALTER TABLE `factura`
   ADD CONSTRAINT `factura_ibfk_1` FOREIGN KEY (`id_empleado`) REFERENCES `empleados` (`id_empleado`),
-  ADD CONSTRAINT `factura_ibfk_2` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`);
+  ADD CONSTRAINT `factura_ibfk_2` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`),
+  ADD CONSTRAINT `factura_ibfk_3` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

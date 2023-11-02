@@ -93,6 +93,24 @@
             <hr class="sidebar-divider my-0">
 
 
+            <!-- Productos -->
+            <div class="sidebar-heading">
+                Productos
+            </div>
+
+            <!-- Menu de Productos -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="../Productos/index.php" aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fa-solid fa-tags fa-beat-fade" style="color: #ffff00;"></i>
+                    <span>Productos</span>
+                </a>
+
+            </li>
+
+            <!-- Linea de separacion  -->
+            <hr class="sidebar-divider my-0">
+
+
             <!-- Factura -->
             <div class="sidebar-heading">
                 Facturas
@@ -152,20 +170,20 @@
 
                         <!--  Usuario-->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Nombre del Usuario</span>
-                                <img class="img-profile rounded-circle" src="../img/undraw_profile.svg">
+                            <a class="nav-link dropdown-toggle" href="/articulacion" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Cerrar sesión</span>
+                                <!-- <img class="img-profile rounded-circle" src="../img/undraw_profile.svg"> -->
                             </a>
 
                             <!-- Informacion del Usuario -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                            <!-- <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
 
 
                                 <a class="btn btn-user" href="../index.html">
                                     <p>Cerrar Sesion</p>
                                 </a>
 
-                            </div>
+                            </div> -->
                         </li>
 
                     </ul>

@@ -1,3 +1,42 @@
+<?php
+//incluimos la conexion a la base de datos 
+include("../Conexion/conexion.php");
+
+
+//Recibimos las variables enviadas
+$correo_empleado = (isset($_POST['correo_empleado'])) ? $_POST['correo_empleado'] : "";
+$clave_empleado = (isset($_POST['clave_empleado'])) ? $_POST['clave_empleado'] : "";
+
+
+
+$accion = (isset($_POST['accion'])) ? $_POST['accion'] : "";
+
+
+switch ($accion) {
+    case 'btnIniciar':
+
+            /* Consultamos el empleado  */
+            $consultaEmpleado = $conn->prepare("SELECT * FROM empleados 
+                WHERE correo_empleado = '$correo_empleado' 
+                AND clave_empleado = '$clave_empleado'");
+            $consultaEmpleado->execute();
+            $resultadoEmpleado = $consultaEmpleado->get_result();
+            //Al final de todas las consultas se cierra la conexion
+            $conn->close();
+
+
+            if ($resultadoEmpleado->num_rows > 0) {
+                header('location: index.php');
+            } else {
+                header('location: login.php');
+            }
+
+        break;
+
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,15 +80,15 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">E.P.S COMPUTO</h1>
                                     </div>
-                                    <form class="user">
+                                    <form class="user" action="" method="post">
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                                id="exampleInputEmail" aria-describedby="emailHelp" name="correo_empleado"
                                                 placeholder="Correo">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Contraseña">
+                                                id="exampleInputPassword" placeholder="Contraseña" name="clave_empleado">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -57,9 +96,10 @@
                                                 <label class="custom-control-label" for="customCheck">Recuerdame</label>
                                             </div>
                                         </div>
-                                        <a href="../paginas/index.php" class="btn btn-primary btn-user btn-block">
+                                        <button value="btnIniciar" class="btn btn-primary btn-user btn-block" type="submit" name="accion">Iniciar</button>
+                                        <!-- <a href="../paginas/index.php" class="btn btn-primary btn-user btn-block">
                                             Enviar
-                                        </a>
+                                        </a> -->
                                         <hr>
                                         
                                     </form>

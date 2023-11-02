@@ -45,7 +45,7 @@
                                         if ($listaEmpleados->num_rows > 0) {
                                             foreach ($listaEmpleados as $empleado) {
                                                 echo " <option value='' hidden > Seleccione el Empleado</option> ";
-                                                echo " <option value='{$empleado['id']}'> {$empleado['id']} {$empleado['nombre']} {$empleado['apellidoP']} </option> ";
+                                                echo " <option value='{$empleado['id_empleado']}'> {$empleado['id_empleado']} {$empleado['nombre_empleado']} {$empleado['apellido_empleado']} </option> ";
                                             }
                                         } else {
 
@@ -74,7 +74,7 @@
 
                                         if ($listaClientes->num_rows > 0) {
                                             foreach ($listaClientes as $cliente) {
-                                                echo " <option value='' hidden > Seleccione el Empleado</option> ";
+                                                echo " <option value='' hidden > Seleccione el Cliente</option> ";
                                                 echo " <option value='{$cliente['id_cliente']}'> {$cliente['id_cliente']} {$cliente['nombre_cliente']} {$cliente['apellido_cliente']} </option> ";
                                             }
                                         } else {
@@ -90,6 +90,34 @@
                                 <!-- FIN SELECTOR CLIENTE -->
 
 
+
+                                <!-- INICIO SELECTOR PRODUCTO -->
+
+                                <div class="form-group col-md-12">
+
+                                <label for="id_producto">Producto</label>
+
+
+                                <select name="id_producto" id="id_producto" class="form-control">
+
+                                    <?php
+
+                                    if ($listaProductos->num_rows > 0) {
+                                        foreach ($listaProductos as $producto) {
+                                            echo " <option value='' hidden > Seleccione el Producto</option> ";
+                                            echo " <option value='{$producto['id_producto']}'> {$producto['id_producto']} {$producto['nombre_producto']} </option> ";
+                                        }
+                                    } else {
+
+                                        echo "<h2> No tenemos resultados </h2>";
+                                    }
+                                    ?>
+                                </select>
+
+
+                                </div>
+
+                                <!-- FIN SELECTOR CLIENTE -->
 
                                 <div class="form-group col-md-12">
                                     <label for="detalle">Detalle</label>
